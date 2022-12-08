@@ -1,7 +1,6 @@
 //import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { View,Text,StatusBar,StyleSheet } from 'react-native';
-//import { Card, ListItem, Button, Icon } from 'react-native-elements'
 import colors from './misc/colors';
 import axios from 'axios';
  
