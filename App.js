@@ -1,20 +1,43 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import { useState,useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import Intro from './App/Components/Screens/Intro';
+import PostScreen from './App/Components/Screens/PostScreen';
+import axios from 'axios';
+
+
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+const [user,setuser] = useState({});
+  return(
+    
+<PostScreen/>
+
+
+  ) 
 }
 
+
+
+/*
+
+const finduser = async()=>{
+const result = await AsyncStorage.getItem('user');
+console.log(result);
+setuser(JSON.parse(result))
+}
+
+  useEffect(() => {
+    finduser();
+  }, []);
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex:1,
+    backgroundColor:'#fff',
+    alignItems:'center',
+    justifyContent:'center',
   },
 });
+*/
