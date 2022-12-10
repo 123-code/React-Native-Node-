@@ -1,11 +1,22 @@
 //import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React,{useState} from 'react';
 import { View,Text,StatusBar,StyleSheet } from 'react-native';
 import colors from './misc/colors';
 import axios from 'axios';
+
+const client = axios.create({
+    baseURL: "https://localhost:3500/api" 
+  });
  
 
 const PostScreen = ()=>{
+    const[post,setpost] = useState({
+        Nombre:"",
+        Contenido:""
+    });
+
+
+ 
     return(
         <>
         <StatusBar barStyle='dark-content' backgroundColor={colors.DARK}>

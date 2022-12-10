@@ -1,13 +1,20 @@
 import express from 'express';
 import { PostSchema } from '../Models/PostSchema';
+import { postPost } from './postPostRoute';
+
 const router = express.Router();
 // get y post API 
-export const Routes = ()=>{
 
-    router.post("/sendpost",async(req,res)=>{
+
+export const routes = [postPost]
+
+   
+    /*
+ router.post("/sendpost",(req,res)=>{
         const post = new PostSchema({
             nombre:req.body.nombre,
-            poblacion:req.body.poblacion,
+            precio:req.body.precio,
+            descripcion:req.body.descripcion
         });
         post.save((data,err)=>{
             if(err){
@@ -16,7 +23,7 @@ export const Routes = ()=>{
             else{
                 res.send(data);
                 res.status(200)
-                console.log("Datos guardados")
+                console.log("Datos guardados");
             }
         })
     })
@@ -24,6 +31,7 @@ export const Routes = ()=>{
 
 
     router.get("/getpost",async()=>{
+
         try{
 const getpost = await PostSchema.find();
 res.json(getpost);
@@ -32,4 +40,5 @@ res.json(getpost);
         }
     })
     
-}
+    module.exports = ("Routes",router);
+    */

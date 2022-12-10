@@ -3,21 +3,30 @@ import {View,Text,StyleSheet,TextInput,Dimensions,Button,Pressable } from 'react
 import colors from './misc/colors';
 import axios from 'axios';
 
+const client = axios.create({
+    baseURL: "https://localhost:8000/api" 
+  });
+
 export default function AddPost(){
-    const [Nombre,setNombre] = useState("");
-    const [Descripcion,setDescripcion] = useState("");
+
+   const [post,setpost] = useState({
+    Nombre:"",
+    Contenido:""
+   })
+
+   const postPost = ()=>{
+    client.post("",{
+        nombre:post.Nombre,
+        Contenido:post.Contenido
+    }).then((response)=>{
+        setpost([response.data,...post]);
+    }).catch((err)=>{
+        console.error(err);
+    })
+   }
+
 
 //axios.post 
-    const handleNombreInput = name =>{
-setNombre(name);
-
-    }
-
-
-    const handleDescripcionInput = desc =>{
-setDescripcion(desc);
-    }
-
 return(
     <>
 <View>
@@ -27,7 +36,7 @@ return(
     <Text style={styles.text1}> Descripción:</Text>
     <TextInput style={styles.textInput}  onChangetext={handleDescripcionInput}  placeholder = "Descripción"/>
     
-    <Pressable style={styles.button}>
+    <Pressable style={styles.button} onPress={postPost}>
       <Text style={styles.text}> Agregar </Text>
     </Pressable>
 
