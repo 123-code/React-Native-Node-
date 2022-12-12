@@ -17,6 +17,6 @@ export const postPost = {
                 res.status(200)
                 console.log("Datos guardados");
             }
-        })
+        }) 
     }
 }
