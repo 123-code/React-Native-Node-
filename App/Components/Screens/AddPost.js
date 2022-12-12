@@ -31,10 +31,10 @@ return(
     <>
 <View>
     <Text style={styles.text1}> Nombre:</Text>
-    <TextInput style={styles.textInput} onChangetext={handleNombreInput} placeholder = "Post"/>
+    <TextInput style={styles.textInput} onChangeText={newText => setpost.Nombre(newText)} placeholder = "Post"/>
 
     <Text style={styles.text1}> Descripción:</Text>
-    <TextInput style={styles.textInput}  onChangetext={handleDescripcionInput}  placeholder = "Descripción"/>
+    <TextInput style={styles.textInput}  onChangeText={newText => setpost.Contenido(newText)}  placeholder = "Descripción"/>
     
     <Pressable style={styles.button} onPress={postPost}>
       <Text style={styles.text}> Agregar </Text>
