@@ -8,22 +8,29 @@ const client = axios.create({
   });
 
 export default function AddPost(){
+   const [Nombre,setNombre] = useState();
+   const [Contenido,setContenido] = useState(); 
+   const [posts,setposts] = useState([]);
 
-   const [post,setpost] = useState({
-    Nombre:"",
-    Contenido:""
-   })
+ const postPost = async(Nombre,Contenido)=>{ 
+await fetch("https://localhost:8000/api/postPost"),{
+  method:'POST',
+  headers:{
+    Accept: 'application/json',
+    'Content-Type': 'application/json'
+  },body:JSON.stringify({
+    firstParam: Nombre,
+    secondParam: Contenido
+  })
+}.then((response)=> response.json())
+.catch((error) => {
+  console.error(error);
+});
 
-   const postPost = ()=>{
-    client.post("",{
-        nombre:post.Nombre,
-        Contenido:post.Contenido
-    }).then((response)=>{
-        setpost([response.data,...post]);
-    }).catch((err)=>{
-        console.error(err);
-    })
-   }
+setposts([response.data, ...posts]);
+setNombre([response.data.Nombre, ...response]);
+setNombre([response.data.Contenido, ...response]);
+   };
 
 
 //axios.post 
@@ -31,10 +38,10 @@ return(
     <>
 <View>
     <Text style={styles.text1}> Nombre:</Text>
-    <TextInput style={styles.textInput} onChangeText={newText => setpost.Nombre(newText)} placeholder = "Post"/>
+    <TextInput style={styles.textInput} onChangeText={newText => setNombre(newText)} placeholder = "Post"/>
 
     <Text style={styles.text1}> Descripción:</Text>
-    <TextInput style={styles.textInput}  onChangeText={newText => setpost.Contenido(newText)}  placeholder = "Descripción"/>
+    <TextInput style={styles.textInput}  onChangeText={newText => setContenido(newText)}  placeholder = "Descripción"/>
     
     <Pressable style={styles.button} onPress={postPost}>
       <Text style={styles.text}> Agregar </Text>
@@ -44,7 +51,7 @@ return(
     </>
 )
 
-}
+}  
 
 const styles = StyleSheet.create({
     container:{
@@ -83,3 +90,15 @@ borderRadius:12,margin:12
       color: 'black',
     }
   });
+
+
+  /*
+     let response = await client.post('',{
+      Nombre:Nombre,
+      Contenido:Contenido,
+    });
+    JSON.decycle(setNombre(response.Nombre));
+    JSON.decycle(setContenido(response.Contenido));
+  
+  */
+  
