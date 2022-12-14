@@ -13,7 +13,7 @@ export default function AddPost(){
    const [posts,setposts] = useState([]);
 
  const postPost = async(Nombre,Contenido)=>{ 
-await fetch("https://localhost:8000/api/postPost"),{
+await fetch("172.20.10.2:8000/api/postPost"),{
   method:'POST',
   headers:{
     Accept: 'application/json',

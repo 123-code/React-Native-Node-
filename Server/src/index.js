@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import  { MongoClient, ServerApiVersion }from 'mongodb';
 import  {routes}  from  '../API_Routes';
 import cors from 'cors';
 import http from 'http';
@@ -7,11 +8,14 @@ import https from 'https';
 import fs from 'fs';
 
 const main = async()=>{
-    const port = 8000;
-    const url = "mongodb://127.0.0.1:27017/catalogo";
+    const port = 8001
+    const password  = encodeURIComponent("JoseNaranj0!");
+    const url = `mongodb+srv://naranjojose256:J${password}@cluster0.anb85.mongodb.net/?retryWrites=true&w=majority`;
+    /*
     const privateKey = fs.readFileSync('sslcert/server.key','utf8');
     const certificate = fs.readFileSync('sslcert/server.cert','utf8');
     const credentials = {key:privateKey,cert:certificate};
+    */
     const server = express();
     
     server.use(express.json());
@@ -21,16 +25,25 @@ const main = async()=>{
 
 
 
-const DatabaseC = async()=>{
+const DatabaseC = ()=>{
        
-    const client = await mongoose.connect(url).then(()=>{
-        console.log("connected to MongoDB")
-    }).catch(error=>{console.error(error)})
+    const uri = url;
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+    client.connect(err => {
+      const collection = client.db("test").collection("devices");
+      // perform actions on the collection object
+      client.close();
+    });
 
-console.log("connected");
+
+}
+try{
+    DatabaseC();
+    console.log("Connected To MongoDB")
+}catch(err){
+    console.error(err);
 }
 
-DatabaseC();
 
 routes.forEach(route => {
     server[route.method](route.path, route.handler);
