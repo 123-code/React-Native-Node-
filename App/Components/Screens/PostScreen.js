@@ -1,4 +1,5 @@
 //import { StatusBar } from 'expo-status-bar';
+// https://gateway03.southcentralus.console.azure.com/n/cc-4ceffcb4/cc-4ceffcb4/proxy/8001/postPost
 import React,{useState} from 'react';
 import { View,Text,StatusBar,StyleSheet } from 'react-native';
 import colors from './misc/colors';
