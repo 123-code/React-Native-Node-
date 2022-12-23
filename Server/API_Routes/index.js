@@ -5,7 +5,6 @@ import { postPost } from './postPostRoute';
 const router = express.Router();
 // get y post API 
 
-
 export const routes = [postPost]
 
    

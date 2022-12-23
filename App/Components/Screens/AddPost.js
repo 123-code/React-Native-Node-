@@ -4,7 +4,7 @@ import colors from './misc/colors';
 import axios from 'axios';
 
 const client = axios.create({
-    baseURL: "https://localhost:8000/api" 
+    baseURL: "https://localhost:8000/api/postPost" 
   });
 
 export default function AddPost(){
@@ -13,7 +13,7 @@ export default function AddPost(){
    const [posts,setposts] = useState([]);
 
  const postPost = async(Nombre,Contenido)=>{ 
-await fetch("172.20.10.2:8000/api/postPost"),{
+await fetch("https://localhost:8001/api.po" ),{
   method:'POST',
   headers:{
     Accept: 'application/json',

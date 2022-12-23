@@ -11,7 +11,7 @@ const cert = fs.readFileSync('./Security/localhost.crt');
 
 const main = async()=>{
     
-    const port = 8001
+    const port = 8001   
     const password  = encodeURIComponent("JoseNaranj0!");
     const url = `mongodb+srv://naranjojose256:J${password}@cluster0.anb85.mongodb.net/?retryWrites=true&w=majority`;
     /*
@@ -20,7 +20,7 @@ const main = async()=>{
     const credentials = {key:privateKey,cert:certificate};
     */
     const server = express();
-    const Server = https.createServer({key,cert},server);
+   
     
     server.use(express.json());
     server.use(cors());
@@ -53,7 +53,7 @@ routes.forEach(route => {
     server[route.method](route.path, route.handler);
 });
 
-
+const Server = https.createServer({key,cert},server);
 Server.listen(port,()=>{
         console.log('servidor en puerto 8001')
     });

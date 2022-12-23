@@ -13,8 +13,10 @@ import AddPost from './App/Components/Screens/AddPost';
 export default function App() {
 const [user,setuser] = useState({});
   return(
-    
-<AddPost/>
+    <NavigationContainer>
+     <Intro/>
+    </NavigationContainer>
+
 
 
   ) 

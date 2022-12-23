@@ -2,12 +2,30 @@ import { StatusBar } from 'expo-status-bar';
 import React,{useState} from 'react';
 import {View,Text,StyleSheet,TextInput,Dimensions} from 'react-native';
 import colors from './misc/colors';
-
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
 import RoundButton from '../RoundButton';
+import AddPost from './AddPost';
 
-//App/Components/RoundButton.js
-const Intro = ()=>{
+const Stack = createNativeStackNavigator();
+export default function IntroStack (){
+    return (
+   
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Home"
+            component={Intro} />
+          <Stack.Screen
+            name="PostPost"
+            component={AddPost}/>
+        </Stack.Navigator>
+  
+    );
+  };
+  
+
+const Intro = ({navigation})=>{
     const [name,setName] = useState()
     const handleOnChangeText = text=>{
 setName(text)
@@ -21,6 +39,7 @@ setName(text)
         }   
 
         await AsyncStorage.setItem('user',JSON.stringify(user))
+        navigation.navigate('PostPost');
     }
     return(
         <>
@@ -49,6 +68,4 @@ borderColor:colors.PRIMARY,width,
 height:40,
 borderRadius:12
 }
-})
-
-export default Intro; 
+});
