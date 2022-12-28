@@ -10,7 +10,7 @@ import AddPost from './AddPost';
 
 const Stack = createNativeStackNavigator();
 export default function IntroStack (){
-    return (
+    return (//user
    
         <Stack.Navigator>
           <Stack.Screen
@@ -26,7 +26,7 @@ export default function IntroStack (){
   
 
 const Intro = ({navigation})=>{
-    const [name,setName] = useState()
+    const [name,setName] = useState("")
     const handleOnChangeText = text=>{
 setName(text)
     }
@@ -34,11 +34,9 @@ setName(text)
 
 
     const handlesubmit = async()=>{
-        const user = {
-            name: name
-        }   
+       
 
-        await AsyncStorage.setItem('user',JSON.stringify(user))
+        await AsyncStorage.setItem('name1',JSON.stringify(name))
         navigation.navigate('PostPost');
     }
     return(
@@ -46,8 +44,9 @@ setName(text)
         <StatusBar hidden/>
         <View style={styles.container}>
 <Text> Ingrese su Nombre para continuar: </Text>
-<TextInput value={user} onChangetext={handleOnChangeText} placeholder = " Ingrese Su Nombre" style={styles.textInput}/>
-{user.trim().length > 3 ?( <RoundButton onPress={handlesubmit} AntIconName='arrowright'/> ): null}
+<TextInput value={name} onChangetext={text => handleOnChangeText(text)} placeholder = " Ingrese Su Nombre" style={styles.textInput}/>
+{ <RoundButton onPress={handlesubmit} AntIconName='arrowright'/> 
+}
         </View>
         </>
     )

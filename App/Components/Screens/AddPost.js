@@ -7,29 +7,41 @@ const client = axios.create({
     baseURL: "https://localhost:8000/api/postPost" 
   });
 
+
+  const API_URL = 'https://localhost:8001/api/postPost'
+
 export default function AddPost(){
-   const [Nombre,setNombre] = useState();
-   const [Contenido,setContenido] = useState(); 
+   const [Nombre,setNombre] = useState("");
+   const [Contenido,setContenido] = useState(""); 
+   const [Precio,setPrecio] = useState(0);
    const [posts,setposts] = useState([]);
 
- const postPost = async(Nombre,Contenido)=>{ 
-await fetch("https://localhost:8001/api.po" ),{
-  method:'POST',
-  headers:{
-    Accept: 'application/json',
-    'Content-Type': 'application/json'
-  },body:JSON.stringify({
-    firstParam: Nombre,
-    secondParam: Contenido
-  })
-}.then((response)=> response.json())
-.catch((error) => {
-  console.error(error);
-});
+ const postPost = async(Nombre,Precio,Contenido)=>{ 
 
-setposts([response.data, ...posts]);
-setNombre([response.data.Nombre, ...response]);
-setNombre([response.data.Contenido, ...response]);
+  try{
+    await fetch(`${API_URL}/private`),{
+      method:'POST',
+      headers:{
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },body:JSON.stringify({
+      Nombre:Nombre,
+      precio:Precio,
+      Contenido:Contenido
+      })
+    }.then((response)=> response.json())
+    .catch((error) => {
+      console.error(error);
+    });
+    
+    setposts([response.data, ...posts]);
+    setNombre([response.data.Nombre, ...response]);
+    setContenido([response.data.Contenido, ...response]);
+    setPrecio([response.data.Precio,...response]);
+  }catch(err){
+    console.error(err)
+  }
+ 
    };
 
 
@@ -40,13 +52,16 @@ return(
     <Text style={styles.text1}> Nombre:</Text>
     <TextInput style={styles.textInput} onChangeText={newText => setNombre(newText)} placeholder = "Post"/>
 
+    <Text style={styles.text1}> Precio:</Text>
+    <TextInput style={styles.textInput}  onChangeText={newText => setPrecio(newText)}  placeholder = "Precio"/>
+ 
     <Text style={styles.text1}> Descripción:</Text>
     <TextInput style={styles.textInput}  onChangeText={newText => setContenido(newText)}  placeholder = "Descripción"/>
     
-    <Pressable style={styles.button} onPress={postPost}>
+    <Pressable style={styles.button} onPress={()=>{postPost(Nombre,Contenido,Precio)}}>
       <Text style={styles.text}> Agregar </Text>
     </Pressable>
-
+ 
 </View>
     </>
 )
