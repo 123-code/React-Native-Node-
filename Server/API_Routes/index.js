@@ -1,6 +1,7 @@
 import express from 'express';
 import { PostSchema } from '../Models/PostSchema';
 import { postPost } from './postPostRoute';
+import { gettest } from './gettest';
 
 const router = express.Router();
 // get y post API 

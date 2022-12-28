@@ -4,11 +4,13 @@ import colors from './misc/colors';
 import axios from 'axios';
 
 const client = axios.create({
-    baseURL: "https://localhost:8000/api/postPost" 
+    baseURL: 'http://192.169.58.100:8001/api/postPost'
   });
 
 
-  const API_URL = 'https://localhost:8001/api/postPost'
+  const API_URL = 'http://192.169.58.100:8001/api/postPost'
+
+
 
 export default function AddPost(){
    const [Nombre,setNombre] = useState("");
@@ -19,25 +21,17 @@ export default function AddPost(){
  const postPost = async(Nombre,Precio,Contenido)=>{ 
 
   try{
-    await fetch(`${API_URL}/private`),{
-      method:'POST',
-      headers:{
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },body:JSON.stringify({
+    const response = await axios.post(client,{
       Nombre:Nombre,
-      precio:Precio,
+      Precio:Precio,
       Contenido:Contenido
-      })
-    }.then((response)=> response.json())
-    .catch((error) => {
-      console.error(error);
-    });
+    })
     
     setposts([response.data, ...posts]);
     setNombre([response.data.Nombre, ...response]);
     setContenido([response.data.Contenido, ...response]);
     setPrecio([response.data.Precio,...response]);
+    console.log(response.data);
   }catch(err){
     console.error(err)
   }
