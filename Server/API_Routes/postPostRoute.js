@@ -13,10 +13,11 @@ export const postPost = {
                 console.error(err)
             }
             else{
-                data.toJSON()
+                JSON.stringify(data)
                 res.send(data);
                 res.status(200)
                 console.log("Datos guardados");
+                console.log(data)
             }
         }) 
     }

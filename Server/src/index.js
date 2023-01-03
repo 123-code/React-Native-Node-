@@ -13,12 +13,14 @@ const main = async()=>{
     
     const port = 8001   
     const password  = encodeURIComponent("JoseNaranj0!");
-    const url = `mongodb+srv://naranjojose256:J${password}@cluster0.anb85.mongodb.net/?retryWrites=true&w=majority`;
+    const url = 'mongodb://127.0.0.1:27017/catalogo';
     /*
     const privateKey = fs.readFileSync('sslcert/server.key','utf8');
     const certificate = fs.readFileSync('sslcert/server.cert','utf8');
     const credentials = {key:privateKey,cert:certificate};
     */
+//`mongodb+srv://naranjojose256:J${password}@cluster0.anb85.mongodb.net/?retryWrites=true&w=majority`
+    //mongodb://127.0.0.1:27017/paisesyc
     const server = express();
    
     
@@ -53,8 +55,8 @@ routes.forEach(route => {
     server[route.method](route.path, route.handler);
 });
 
-const Server = https.createServer({key,cert},server);
-Server.listen(port,()=>{
+//const Server = https.createServer({key,cert},server);
+server.listen(port,()=>{
         console.log('servidor en puerto 8001')
     });
 

@@ -21,11 +21,23 @@ export default function AddPost(){
  const postPost = async(Nombre,Precio,Contenido)=>{ 
 
   try{
-    const response = await axios.post(client,{
-      Nombre:Nombre,
-      Precio:Precio,
-      Contenido:Contenido
+    const response = await fetch(API_URL,{
+      method:'POST',
+      headers: {
+        'Content-Type': 'application/json'
+
+      },
+      body: JSON.stringify(
+        {
+          nombre:Nombre,
+          precio:Precio,
+          descripcion:Contenido
+        }
+      )
+     
     })
+    const data = await response.json();
+    console.log(data);
     
     setposts([response.data, ...posts]);
     setNombre([response.data.Nombre, ...response]);
