@@ -4,11 +4,11 @@ import colors from './misc/colors';
 import axios from 'axios';
 
 const client = axios.create({
-    baseURL: 'http://192.169.58.100:8001/api/postPost'
+    baseURL: 'http://172.31.170.131:8000/api/postPost'
   });
 
 
-  const API_URL = 'http://192.169.58.100:8000/api/postPost'
+  const API_URL = 'http://172.31.170.131:8000/api/postPost'
 
 
 
@@ -24,9 +24,9 @@ export default function AddPost(){
     const response = await fetch(API_URL,{
       method:'POST',
       headers: {
-        'Content-Type': 'application/json'
-
-      },
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        },
       body: JSON.stringify(
         {
           nombre:Nombre,
@@ -64,10 +64,11 @@ return(
     <Text style={styles.text1}> Descripción:</Text>
     <TextInput style={styles.textInput}  onChangeText={newText => setContenido(newText)}  placeholder = "Descripción"/>
     
-    <Pressable style={styles.button} onPress={()=>{postPost(Nombre,Contenido,Precio)}}>
+    <Pressable style={styles.button} onPress={()=>{postPost(Nombre,Precio,Contenido)}}>
       <Text style={styles.text}> Agregar </Text>
     </Pressable>
- 
+    {Nombre != null ?  <Text> {Nombre} Agregada con exito! </Text> :  <Text>  Ha ocurrido un Error </Text>}
+
 </View>
     </>
 )
