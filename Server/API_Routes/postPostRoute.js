@@ -2,13 +2,13 @@ import  PostSchema  from "../Models/PostSchema";
 export const postPost = {
     path:'/api/postPost',
     method:'post',
-    handler:(req,res)=>{
+    handler:async (req,res)=>{
         const post = new PostSchema({
             nombre:req.body.nombre,
             precio:req.body.precio,
             descripcion:req.body.descripcion
         });
-        post.save((data,err)=>{
+        await post.save((data,err)=>{
             if(err){
                 console.error(err)
             }

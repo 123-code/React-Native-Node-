@@ -8,7 +8,7 @@ const client = axios.create({
   });
 
 
-  const API_URL = 'http://192.169.58.100:8001/api/postPost'
+  const API_URL = 'http://192.169.58.100:8000/api/postPost'
 
 
 
