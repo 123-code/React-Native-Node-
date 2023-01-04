@@ -7,6 +7,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import RoundButton from '../RoundButton';
 import AddPost from './AddPost';
+import PostScreen from './PostScreen';
 
 const Stack = createNativeStackNavigator();
 export default function IntroStack (){
@@ -19,6 +20,9 @@ export default function IntroStack (){
           <Stack.Screen
             name="PostPost"
             component={AddPost}/>
+             <Stack.Screen
+            name="Posts"
+            component={PostScreen}/>
         </Stack.Navigator>
   
     );

@@ -2,6 +2,8 @@ import React,{useState} from 'react';
 import {View,Text,StyleSheet,TextInput,Dimensions,Button,Pressable } from 'react-native';
 import colors from './misc/colors';
 import axios from 'axios';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import RoundButton from '../RoundButton';
 
 const client = axios.create({
     baseURL: 'http://172.31.170.131:8000/api/postPost'
@@ -12,7 +14,7 @@ const client = axios.create({
 
 
 
-export default function AddPost(){
+export default function AddPost({navigation}){
    const [Nombre,setNombre] = useState("");
    const [Contenido,setContenido] = useState(""); 
    const [Precio,setPrecio] = useState(0);
@@ -50,6 +52,9 @@ export default function AddPost(){
  
    };
 
+   const handlesubmit = ()=>{
+    navigation.navigate('Posts');
+}
 
 //axios.post 
 return(
@@ -67,7 +72,8 @@ return(
     <Pressable style={styles.button} onPress={()=>{postPost(Nombre,Precio,Contenido)}}>
       <Text style={styles.text}> Agregar </Text>
     </Pressable>
-    {Nombre != null ?  <Text> {Nombre} Agregada con exito! </Text> :  <Text>  Ha ocurrido un Error </Text>}
+    <RoundButton onPress={handlesubmit} AntIconName='arrowright'/> 
+   
 
 </View>
     </>

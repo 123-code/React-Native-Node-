@@ -4,30 +4,35 @@ import React,{useState,useEffect} from 'react';
 import { View,Text,StatusBar,StyleSheet } from 'react-native';
 import colors from './misc/colors';
 import axios from 'axios';
+import useAxios from 'axios-hooks'
 
 const client = axios.create({
-    baseURL: "https://localhost:8000/api" 
+    baseURL: "http://172.31.170.131:8000/api" 
   });
  
 
 const PostScreen = ()=>{
-    const[post,setpost] = useState({
-        Nombre:"",
-        Contenido:""
-    });
-
-    const [posts,setposts] = useState([])
+    const [posts,setposts] = useState([]);
+    const [Nombres,setNombres] = useState("");
+    const [Precios,setPrecios] = useState();
+    const [Descripciones,setDescripciones] = useState("");
 
     const fetchposts = ()=>{
         axios.get(client).then((response)=>{
-setposts(response)
+setNombres(response.Nombre);
+setPrecios(response.Precios);
+setDescripciones(response.Descripciones);
+console.log("set worked ")
+        }).catch((err)=>{
+            console.error(err)
         })
-    }
 
+    }
+    /*
 useEffect(()=>{
     fetchposts();
-})
-
+},[])
+*/
     return(
         <>
         <StatusBar barStyle='dark-content' backgroundColor={colors.DARK}>
@@ -38,7 +43,7 @@ useEffect(()=>{
         </StatusBar>
         <View>
             <Text style={styles.header}> Posts Recientes  </Text>
-            {post ?  <h1> {post.title} </h1> : <h1> No hay posts recientes </h1>}
+            {Nombres != "" ?  <Text> {Nombres} </Text> : <Text> No hay posts recientes :( </Text>}
         </View>
         </>
     )

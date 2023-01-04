@@ -2,11 +2,14 @@ import express from 'express';
 import { PostSchema } from '../Models/PostSchema';
 import { postPost } from './postPostRoute';
 import { gettest } from './gettest';
+import { getPost } from './GetPosts';
 
-const router = express.Router();
+
 // get y post API 
 
-export const routes = [postPost]
+export const routes = [postPost,
+    getPost,
+];
 
    
     /*
