@@ -7,7 +7,7 @@ export const getPost = {
         try{
             const post = await PostSchema .find();
             res.json(post)
-            res.send(post)
+           // res.send(post)
         }catch(err){
             console.error(err)
         }
