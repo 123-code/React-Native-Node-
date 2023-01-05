@@ -38,24 +38,32 @@ const [data,setData ] = useState([]);
         }
       }
 
-    
-    /*
-useEffect(()=>{
-    fetchposts();
-},[])
-*/
+const PostCard = ()=>{
+
+}   
+ //{ backgroundColor: '#FFFFFF'}
 return (
-    <View style={{ flex: 1, padding: 24 }}>
+    <>
+    
+    <View style={{ backgroundColor: '#3CB371',padding:5}}> 
+        <Text style = {styles.bigBlue}>
+        Posts Recientes 
+        </Text>
+    </View>
+
+
+    <View style={{ flex: 1, padding: 24 ,backgroundColor: '#FFFAFA'}}>
       {loading ? <ActivityIndicator/> : (
         <FlatList
           data={data}
     
           renderItem={({ item }) => (
-            <Text>{item.nombre}, {item.precio}, {item.descripcion}</Text>
+            <Text style={styles.text}>{item.nombre}, {item.precio}, {item.descripcion}</Text>
           )}
         />
       )}
     </View>
+    </>
   );
  
 }
@@ -64,7 +72,15 @@ const styles = StyleSheet.create({
     header:{
         fontSize:25,
         fontWeight:'bold',
-    }
+    },
+    bigBlue: {
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 30,
+      },
+      text:{
+        color:"#708090"
+      }
  
 })
 
