@@ -3,12 +3,14 @@ import { PostSchema } from '../Models/PostSchema';
 import { postPost } from './postPostRoute';
 import { gettest } from './gettest';
 import { getPost } from './GetPosts';
+import { GetOauthURL } from './GetOauthURL';
 
 
 // get y post API 
 
 export const routes = [postPost,
     getPost,
+    GetOauthURL
 ];
 
    
