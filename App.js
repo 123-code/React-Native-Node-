@@ -7,6 +7,7 @@ import Intro from './App/Components/Screens/Intro';
 import PostScreen from './App/Components/Screens/PostScreen';
 import axios from 'axios';
 import AddPost from './App/Components/Screens/AddPost';
+import Login from './App/Components/Screens/Login';
 
 
 
