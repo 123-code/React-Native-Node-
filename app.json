@@ -22,7 +22,8 @@
       "infoPlist": {
         "NSAllowsArbitraryLoads": {
           "NSAllowsArbitraryLoads": true
-        }
+        },
+        "Path": "ios.joseignacio"
       }
     },
     "android": {
