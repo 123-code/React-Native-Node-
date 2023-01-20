@@ -18,18 +18,20 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "infoPlist": {
-        "NSAllowsArbitraryLoads": {
-          "NSAllowsArbitraryLoads": true
-        },
-        "Path": "ios.joseignacio"
+      "bundleIdentifier": "com.myapp.ios",
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "133427487604-fckojm1va3kssread96bbj03grb2m953.apps.googleusercontent.com"
+        }
       }
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+      "package": "com.myapp.android",
+      "config": {
+        "googleSignIn": {
+          "apiKey": "YOUR_ANDROID_API_KEY",
+          "certificateHash": "YOUR_CERTIFICATE_HASH"
+        }
       }
     },
     "web": {

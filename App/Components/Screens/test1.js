@@ -1,22 +1,24 @@
 import {useState,useEffect} from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { View, Text, TouchableOpacity,Image,Pressable,Button } from 'react-native';
+import { Google } from 'expo-google-app-auth';
 
-export default function LoginScreeen(){
+export default function LoginScreeen({navigation}){
     const [Authenticated,setAuthenticated] = useState(false);
     const [googleURL,setGoogleURL] = useState("");
     const [accessToken,setAccessToken] = useState("");
     const [userInfo,setUserinfo] = useState("");
-    const navigation = useNavigation();
+ 
 
 
         const signinWithGoogle = async()=>{
         try{
-        const result = await Google.logInAsync({
-           // androidClientId:'androidClientId',
+        const {type,accessToken,user} = await Google.logInAsync({
+            androidClientId:'androidClientId',
             iosClientId:'133427487604-fckojm1va3kssread96bbj03grb2m953.apps.googleusercontent.com',
             scopes:['profile','email']
-        });
-        if(result.type === 'success'){
+        })
+        if(type === 'success'){
             setAccessToken(accessToken); 
         }
         else{
@@ -64,19 +66,19 @@ export default function LoginScreeen(){
                 {
                     accessToken ? 
                 setAuthenticated(true):
-                signinWithGoogle();
-                navigation.navigate('Home');
+                    signinWithGoogle();
+                navigation.navigate('Posts');
                 }
                 
             }
-
-
                return(
                     <View>
                         {ShowUserInfo()}
                         <Text> login  </Text>
-            <Pressable onPress={onButtonpresed}/>
-            <Button onPress={accessToken ? GetuserInfo : signinWithGoogle}></Button>
+            
+                        <Button onPress={onButtonpresed} title={"sign up"}/> 
                     </View>
                 )
 }
+// 
+//<Pressable onPress={onButtonpresed} title={"sign up"}/>
