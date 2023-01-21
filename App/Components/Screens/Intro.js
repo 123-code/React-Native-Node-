@@ -8,7 +8,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import RoundButton from '../RoundButton';
 import AddPost from './AddPost';
 import PostScreen from './PostScreen';
-import LoginScreeen from './test1';
+import LoginScreen from './Login';
 
 const Stack = createNativeStackNavigator();
 export default function IntroStack (){
@@ -17,7 +17,7 @@ export default function IntroStack (){
         <Stack.Navigator>
             <Stack.Screen
             name="Login"
-            component={LoginScreeen} />
+            component={LoginScreen} />
           <Stack.Screen
             name="Home"
             component={Intro} />

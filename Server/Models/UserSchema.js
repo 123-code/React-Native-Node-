@@ -4,6 +4,7 @@ import mongoose, { Schema } from 'mongoose';
 const USchema  = new Schema({
     nombre:{required:true,type:String},
     email:{required:true,type:email},
+    password:{required:true,type:String},
 })
 
 const model = mongoose.model('USchema', USchema);

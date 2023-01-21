@@ -1,5 +1,5 @@
 {
-  "expo": { 
+  "expo": {
     "name": "ProyectoJoseI",
     "slug": "ProyectoJoseI",
     "version": "1.0.0",
@@ -18,7 +18,7 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "com.myapp.ios",
+      "bundleIdentifier": "com.myappJI.ios",
       "config": {
         "googleSignIn": {
           "reservedClientId": "133427487604-fckojm1va3kssread96bbj03grb2m953.apps.googleusercontent.com"
@@ -26,7 +26,7 @@
       }
     },
     "android": {
-      "package": "com.myapp.android",
+      "package": "com.myappJI.android",
       "config": {
         "googleSignIn": {
           "apiKey": "YOUR_ANDROID_API_KEY",
@@ -36,6 +36,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6a671852-1a2a-4aea-a8aa-2fa7aa513514"
+      }
     }
   }
 }

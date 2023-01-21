@@ -79,7 +79,8 @@ const styles = StyleSheet.create({
         fontSize: 30,
       },
       text:{
-        color:"#708090"
+        color:"#708090",
+        
       }
  
 })
