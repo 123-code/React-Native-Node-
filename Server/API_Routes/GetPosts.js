@@ -5,7 +5,7 @@ export const getPost = {
     method:'get',
     handler:async (req,res)=>{
         try{
-            const post = await PostSchema .find();
+            const post = await PostSchema.find();
             res.json(post)
            // res.send(post)
         }catch(err){
