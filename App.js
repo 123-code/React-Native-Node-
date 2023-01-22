@@ -9,6 +9,7 @@ import axios from 'axios';
 import AddPost from './App/Components/Screens/AddPost';
 import Login from './App/Components/Screens/Login';
 import LoginScreeen from './App/Components/Screens/test1';
+import AppStack from './App/Components/StackNavigator';
 
 
 
@@ -16,33 +17,7 @@ export default function App() {
 const [user,setuser] = useState({});
   return(
     <NavigationContainer>
-     <Login/>
+     <AppStack/>
     </NavigationContainer>
-
-
-
   ) 
 }
-
-
-
-/*
-
-const finduser = async()=>{
-const result = await AsyncStorage.getItem('user');
-console.log(result);
-setuser(JSON.parse(result))
-}
-
-  useEffect(() => {
-    finduser();
-  }, []);
-const styles = StyleSheet.create({
-  container: {
-    flex:1,
-    backgroundColor:'#fff',
-    alignItems:'center',
-    justifyContent:'center',
-  },
-});
-*/

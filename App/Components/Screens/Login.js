@@ -59,6 +59,7 @@ import PostScreen from './PostScreen';
 
   return(
     <View style={styles.container}>
+      <Text style={styles.text1}> Bienvenido a Payz </Text>
 <Pressable style={styles.button}  
 onPress = {Token ? whenUserAuthenticated : ()=> prompt({useProxy:true,showInRecents:true})}
 >  
@@ -71,7 +72,7 @@ onPress = {Token ? whenUserAuthenticated : ()=> prompt({useProxy:true,showInRece
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFBF0',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -89,6 +90,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     
   },
+  text1:{
+    fontSize: 16,
+  lineHeight: 21,
+  fontWeight: 'bold',
+  letterSpacing: 0.25,
+  color: 'green',
+},
+
 });
 
 

@@ -13,22 +13,23 @@ import LoginScreen from './Login';
 const Stack = createNativeStackNavigator();
 export default function IntroStack (){
     return (//user
-   
-        <Stack.Navigator>
+<NavigationContainer>
+<Stack.Navigator>
+            <Stack.Screen
+            name="Posts"
+            component={PostScreen}/>  
             <Stack.Screen
             name="Login"
             component={LoginScreen} />
+            <Stack.Screen
+            name="PostPost"
+            component={AddPost}/>
           <Stack.Screen
             name="Home"
             component={Intro} />
-          <Stack.Screen
-            name="PostPost"
-            component={AddPost}/>
-             <Stack.Screen
-            name="Posts"
-            component={PostScreen}/>
-
         </Stack.Navigator>
+        </NavigationContainer>
+        
   
     );
   };
@@ -45,6 +46,7 @@ setName(text)
     const handlesubmit = async()=>{
        
 
+
         await AsyncStorage.setItem('name1',JSON.stringify(name))
         navigation.navigate('PostPost');
     }
@@ -52,7 +54,7 @@ setName(text)
         <>
         <StatusBar hidden/>
         <View style={styles.container}>
-<Text> Ingrese su Nombre para continuar: </Text>
+<Text style={styles.text1}> Ingrese su Nombre para continuar: </Text>
 <TextInput value={name} onChangetext={text => handleOnChangeText(text)} placeholder = " Ingrese Su Nombre" style={styles.textInput}/>
 { <RoundButton onPress={handlesubmit} AntIconName='arrowright'/> 
 }
@@ -60,7 +62,7 @@ setName(text)
         </>
     )
 }
-
+ 
 const width = Dimensions.get('window').width -50;
 console.log(width);
 
@@ -75,5 +77,6 @@ borderWidth:2,
 borderColor:colors.PRIMARY,width,
 height:40,
 borderRadius:12
-}
+},
+
 });

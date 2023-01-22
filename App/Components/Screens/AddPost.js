@@ -53,7 +53,11 @@ export default function AddPost({navigation}){
    };
 
    const handlesubmit = ()=>{
-    navigation.navigate('Posts');
+    navigation.navigate('PostPost');
+}
+
+const checkuserLoggedIn = async()=>{
+  // get jwt from local storage
 }
 
 //axios.post 
