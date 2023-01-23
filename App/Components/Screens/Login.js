@@ -33,7 +33,7 @@ import PostScreen from './PostScreen';
         }
       }).then((response)=>
         response.json(),
-        setUserInfo(response.data)
+        setUserInfo(response)
       )
     }
 // when authenticated function runs 
@@ -44,10 +44,12 @@ import PostScreen from './PostScreen';
   
     const whenUserAuthenticated = async()=>{
       try{
-        axios.post(LoginClient,{
+        await axios.post(LoginClient,{
           email:userInfo.email,
           name:userInfo.name,
         })
+        console.log("Corrio")
+        navigation.navigate('Posts')
       }catch(err){
         console.error(err)
       }
@@ -62,7 +64,7 @@ import PostScreen from './PostScreen';
 <Pressable style={styles.button}  
 onPress = {Token ? whenUserAuthenticated : ()=> prompt({useProxy:true,showInRecents:true})}
 >  
-<Text style={styles.buttonText}> {Token ? "Registrarse" : "Iniciar Sesión con Google"}  </Text>
+<Text style={styles.buttonText}> {Token ? " ": "Iniciar Sesión con Google"}  </Text>
 </Pressable>
 </View>
   ) 
