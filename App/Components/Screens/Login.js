@@ -16,6 +16,9 @@ import PostScreen from './PostScreen';
       expoClientId:'133427487604-4m0i8svjekh6iqqb90sq42a5vagp9ec7.apps.googleusercontent.com',
     });
 
+    const LoginClient = axios.create({
+      baseURL: 'http://172.31.170.131:8000/auth/google/createuser'
+    });
 
     useEffect(()=>{
       if(res?.type === 'success'){
@@ -28,33 +31,29 @@ import PostScreen from './PostScreen';
         headers:{
           Authorization:`Bearer ${Token}`
         }
-      })
-
+      }).then((response)=>
+        response.json(),
+        setUserInfo(response.data)
+      )
     }
+// when authenticated function runs 
+    useEffect(()=>{
+      GetUserData();
+    },[Token])
 
+  
     const whenUserAuthenticated = async()=>{
-      /*
       try{
-        const data = await axios.post('http://172.31.170.131:8000/auth/google/createuser')
-        const response = await data.json();
-        console.log(response)
-
+        axios.post(LoginClient,{
+          email:userInfo.email,
+          name:userInfo.name,
+        })
       }catch(err){
         console.error(err)
       }
-      */
     }
 
-    const ShowUserData = async()=>{
-      if(userInfo){
-        return(
-          <View>
-            <Image source={{uri:userInfo.picture}}/>
-            <Text>Bienvenido {userInfo.name}</Text>
-          </View>
-        )
-      }
-    }
+   
 
 
   return(

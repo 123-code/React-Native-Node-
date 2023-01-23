@@ -9,10 +9,7 @@ const client = axios.create({
     baseURL: 'http://172.31.170.131:8000/api/postPost'
   });
 
-
   const API_URL = 'http://172.31.170.131:8000/api/postPost'
-
-
 
 export default function AddPost({navigation}){
    const [Nombre,setNombre] = useState("");

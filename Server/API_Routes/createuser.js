@@ -1,7 +1,7 @@
 import USchema  from '../Models/UserSchema.js';
 export const Createuser = {
     path:'/auth/google/createuser',
-    method :'get',
+    method :'post',
     handler:async(req,res)=>{
         try{
         USchema.create({
