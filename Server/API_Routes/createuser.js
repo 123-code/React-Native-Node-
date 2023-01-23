@@ -7,7 +7,9 @@ export const Createuser = {
         USchema.create({
             email:req.body.email,
             name:req.body.name,
-            password:req.body.password,
+            googleId:req.body.googleId,
+            imageUrl:req.body.imageUrl
+         
         })
         }catch(err){
             console.error(err)

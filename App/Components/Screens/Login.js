@@ -9,7 +9,7 @@ import PostScreen from './PostScreen';
 
   export default function LoginScreen({navigation}){
     const [Token,setAccesstoken] = useState();
-    const [userInfo,setUserInfo] = useState();
+    const [userInfo,setUserInfo] = useState('');
     const [req,res,prompt] = Google.useAuthRequest({
       androidClientId:'133427487604-9b9b5usg2hh8rl9iu2gs0adel4p80emv.apps.googleusercontent.com',
       iosClientId:'133427487604-fckojm1va3kssread96bbj03grb2m953.apps.googleusercontent.com',
@@ -25,45 +25,36 @@ import PostScreen from './PostScreen';
         setAccesstoken(res.authentication.accessToken);
       }
     },[res])
-
+//
     const GetUserData = async()=>{
-      let userData = await fetch('https://www.googleapis.com/userinfo/ve/me',{
+      let userData = await fetch('https://openidconnect.googleapis.com/v1/userinfo',{
         headers:{
           Authorization:`Bearer ${Token}`
         }
-      }).then((response)=>
-        response.json(),
-        setUserInfo(response)
-      )
-    }
-// when authenticated function runs 
-    useEffect(()=>{
-      GetUserData();
-    },[Token])
-
-  
-    const whenUserAuthenticated = async()=>{
+      })
+      let userinfo = await userData.json();
+      setUserInfo(userinfo);
+      console.log(userInfo)
       try{
+        await GetUserData()
         await axios.post(LoginClient,{
           email:userInfo.email,
           name:userInfo.name,
+          imageUrl:userInfo.picture,
+          googleId:userInfo.sub,
         })
-        console.log("Corrio")
         navigation.navigate('Posts')
       }catch(err){
         console.error(err)
       }
     }
-
-   
-
-
+// when authenticated function runs 
+ 
   return(
     <View style={styles.container}>
       <Text style={styles.text1}> Bienvenido a Payz </Text>
 <Pressable style={styles.button}  
-onPress = {Token ? whenUserAuthenticated : ()=> prompt({useProxy:true,showInRecents:true})}
->  
+onPress = {Token ?  GetUserData  : ()=> prompt({useProxy:true,showInRecents:true})}>  
 <Text style={styles.buttonText}> {Token ? " ": "Iniciar Sesión con Google"}  </Text>
 </Pressable>
 </View>
