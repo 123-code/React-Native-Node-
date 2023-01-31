@@ -2,21 +2,10 @@
   // https://gateway03.southcentralus.console.azure.com/n/cc-4ceffcb4/cc-4ceffcb4/proxy/8001/postPost
   import React,{useState,useEffect} from 'react';
   import { ActivityIndicator,View,Text,StatusBar,StyleSheet, FlatList,Pressable } from 'react-native';
-  import colors from './misc/colors';
-  import axios from 'axios';
-  import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
   import { useNavigation } from '@react-navigation/native';
-  import { NavigationContainer } from '@react-navigation/native';
-  import {createNativeStackNavigator} from '@react-navigation/native-stack';
-  import localStorage from 'localstorage-polyfill'; 
 
-  const baseURL =  "http://172.31.170.131:8000/api/getPost";
-  const LoginDataURL = 'http://172.31.170.131:8000/auth/google/createuser';
-    
-  const Stack = createNativeStackNavigator();
+  const baseURL =  "http://172.31.150.215:8000/api/getPost";
 
- 
-  
 
   const PostScreen = ()=>{
   const [loading,setloading] = useState(true);
@@ -28,10 +17,7 @@
   });
   const navigation = useNavigation();
   const [data,setData ] = useState([]);
-  const [SignInButtonText,SetSignInButtonText] = useState();
-  const [Token,setToken] = useState();
-  const [userData,setUserData] = useState();
-  const [userName,setUserName] = useState('');
+  const [userName,setUserName] = useState([]);
  
       useEffect(() => {
           fetchposts();
@@ -39,31 +25,30 @@
 
 //GET UsuarioData API call  
 const fetchUserData = async()=>{
-  try{
-   const res = await fetch('192.168.1.3:8000/auth/getuserdata');  
-   const json = await res.json();
-   setUserName(json.username);
-   console.log(json.username) ;
-  }catch(err){
-    console.error(err);
-  }
+  fetch("http://172.31.150.215:8000/auth/getuserdata/:username")
+  .then(response => response.text())
+  .then(result => setUserName(result))
+  .catch(error => console.log('error', error));
+  
 }
-
-
-
+ 
+useEffect(()=>{
+  fetchUserData()
+},[])
+ 
+ 
       const fetchposts = async ()=>{
           try{
               const response = await fetch(baseURL);
               const json = await response.json();
         
               setData(json)
-              console.info("i")
+
               setloading(false)
           }catch(err){
               console.error(err);
           }
         }
-
 
 
   const PostButton = ()=>{
@@ -86,11 +71,12 @@ const fetchUserData = async()=>{
           Posts Recientes 
           </Text>
           {PostButton()}
-          <Pressable style = {styles.submitbtn} onPress={()=>{navigation.navigate('Login')}}>
-          {Token ?   <Text style = {styles.alltext}>  </Text> : <Text style = {styles.alltext}>Iniciar Sesión </Text>}
-          </Pressable>
       </View>
-     
+      </View>
+      <View style={{backgroundColor: '#FFFAFA'}}>
+      <Pressable style = {styles.submitbtn} onPress={()=>{navigation.navigate('Profile')}}>
+         <Text style = {styles.alltext}> Mi Cuenta </Text>
+          </Pressable>
       </View>
 
      
@@ -99,15 +85,13 @@ const fetchUserData = async()=>{
           <FlatList
             data={data}
             renderItem={({ item }) => (
-              <Text style={styles.text}>{item.nombre}, {item.precio}, {item.descripcion}</Text>
+              <Text style={styles.posttext}>{item.nombre}, {item.precio}, {item.descripcion}</Text>
             )}
           />
         )}
-        
       </View>
       </>
     );
-  
   }
 
   const styles = StyleSheet.create({
@@ -134,6 +118,13 @@ const fetchUserData = async()=>{
             color: 'white',
           
         },
+        posttext:{
+        
+          fontFamily: 'Futura',
+          fontSize: 16,
+          color: 'black',
+        
+      },
         buttontext:{
           color:"white",
           
@@ -156,8 +147,8 @@ const fetchUserData = async()=>{
           backgroundColor: 'black',
         },
         signinbutton:{
-          paddingTop:10,
-          paddingBottom:10,
+          paddingTop:20,
+          paddingBottom:20,
           color:'#fff',
           textAlign:'center',
           backgroundColor:'#68a0cf',
@@ -186,8 +177,7 @@ const fetchUserData = async()=>{
           textAlign: 'center',
           alignItems: 'center',
         },
-
-  
   })
+
 
   export default PostScreen;

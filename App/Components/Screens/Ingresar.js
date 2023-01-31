@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { View, TextInput, Button, StyleSheet, Pressable, Text } from 'react-native';
+import { View, TextInput, Button, StyleSheet, Pressable, Text,Alert } from 'react-native';
 import bcrypt from 'react-native-bcrypt';
 
 
@@ -51,10 +51,34 @@ const LoginForm = ({navigation}) => {
     }
   }
 
+// get by id 
+  const getUserPasswordHash = async()=>{
+    const response = await fetch(PASSWORD_API_URL,{
+        method:'GET'    
+       })
+       const data = await response.json();
+       setPassword(data.params.password);
+       console.log(data);
+  }
+
+/*
+toma dos parametros, el password encriptado de la BD 
+y el encriptado del ingreso del usuario, si los dos
+son iguales, el password es correcto.
+*/
+
+const checkPasswordValid = async(password,phash)=>{
+if(password === phash){
+    setpasswordcorrect(true)
+}
+else{
+    Alert.alert("Password Incorrecto!")
+}
+  }
   return (
     <View style={styles.container}>
          <Text style={styles.biggreentext}>Payz</Text>
-        <Text style={styles.greentext}>  {"\n"} Registro {"\n"}  </Text>
+        <Text style={styles.greentext}>  {"\n"} Login {"\n"}  </Text>
       <TextInput
         style={styles.input}
         placeholder="Username"
@@ -73,15 +97,8 @@ const LoginForm = ({navigation}) => {
       {"\n"} 
       </Text>
       <Pressable style={styles.button} 
-      onPress = {()=>{SaveuserData(username,password),navigation.navigate("Posts")}}>  
+      onPress = {(passwordtext)=>{setPassword(passwordtext),checkPasswordValid(password,phash)}}>  
      <Text style={styles.alltext}>  Ingresar  </Text>
-     </Pressable>
-   
-     <Text  style={styles.greentext}>  {"\n"} Ya tienes una cuenta?   {"\n"} </Text>
-
-     <Pressable style={styles.button}  
-      onPress = {()=>{navigation.navigate("ingreso")}}>  
-     <Text  style={styles.alltext}>  Log In  </Text>
      </Pressable>
     </View>
   );

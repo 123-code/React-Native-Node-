@@ -4,8 +4,9 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Intro from './Screens/Intro.js';
 import AddPost from './Screens/AddPost';
 import PostScreen from './Screens/PostScreen';
-import LoginScreen from './Screens/Login';
+import Profile from './Screens/Profile';
 import  SignUp from './Screens/SignUp'
+import Ingresar from './Screens/Ingresar'
 
 
 const Stack = createNativeStackNavigator();
@@ -17,11 +18,17 @@ export default function AppStack (){
             name="signupp"
             component={SignUp} /> 
             <Stack.Screen
+            name="ingreso"
+            component={Ingresar} /> 
+            <Stack.Screen
             name="PostPost"
             component={AddPost}/>
              <Stack.Screen
             name="Posts"
             component={PostScreen}/>  
+            <Stack.Screen
+              name="Profile"
+              component={Profile}/>
           <Stack.Screen
             name="Home"
             component={Intro} />
