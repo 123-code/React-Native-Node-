@@ -8,8 +8,9 @@ import RoundButton from '../RoundButton';
 const client = axios.create({
     baseURL: 'http://172.31.170.131:8000/api/postPost'
   });
+  //http://172.31.150.215:8000/api/postPost
 
-  const API_URL = 'http://172.31.170.131:8000/api/postPost'
+  const API_URL = 'http://172.31.150.215:8000/api/postPost'
 
 export default function AddPost({navigation}){
    const [Nombre,setNombre] = useState("");
@@ -53,9 +54,6 @@ export default function AddPost({navigation}){
     navigation.navigate('PostPost');
 }
 
-const checkuserLoggedIn = async()=>{
-  // get jwt from local storage
-}
 
 //axios.post 
 return(
@@ -81,7 +79,6 @@ return(
 )
 
 }  
-
 const styles = StyleSheet.create({
     container:{
         flex:1,

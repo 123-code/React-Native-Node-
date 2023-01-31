@@ -12,6 +12,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
     const [Token,setAccesstoken] = useState();
     const [userInfo,setUserInfo] = useState([]);
     const [Auth,setAuth] = useState();
+    const [RequireRefresh,setRequireRefresh] = useState(false); 
     const [req,res,prompt] = Google.useAuthRequest({
       androidClientId:'133427487604-9b9b5usg2hh8rl9iu2gs0adel4p80emv.apps.googleusercontent.com',
       iosClientId:'133427487604-fckojm1va3kssread96bbj03grb2m953.apps.googleusercontent.com',
@@ -41,8 +42,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
       const getUserToken = async()=>{
 const JsonValue = await AsyncStorage.getItem("auth")
 if (JsonValue != null){
+  const jsonauthvalue = JSON.parse(JsonValue);
   setAuth(JSON.parse(JsonValue));
-  console.log(Auth)
+  console.log(Auth);
+  setRequireRefresh(!Google.TokenResponse.isTokenFresh({
+    expiresIn: jsonauthvalue.expiresIn,
+    issuedAt:jsonauthvalue.jsonauthvalue.issuedAt,
+  }));
 }
       }
       getUserToken()
@@ -87,6 +93,41 @@ const ShowUserData = ()=>{
         console.error(err)
       }
     }
+//Google.TokenResponse.isTokenFresh
+    const getClientID = ()=>{
+      if(platform.OS ==='ios'){
+        return '133427487604-fckojm1va3kssread96bbj03grb2m953.apps.googleusercontent.com'
+      }
+      else if(platform.OS ==='android'){
+        return '133427487604-9b9b5usg2hh8rl9iu2gs0adel4p80emv.apps.googleusercontent.com'
+      }
+      else{
+        console.log("Unsupported Platform");
+      }
+    }
+
+    const refreshToken = async()=>{
+      const clientID = getClientID();
+      const tokenresult = await Google.refreshAsync({
+clientID:clientID,
+refreshToken:Auth.refreshToken },{
+  tokenEndpoint:'https://www.googleapis.com/oauth2/v2/userinfo',
+      });
+
+      tokenresult.refreshToken = Auth.refreshToken
+setAuth(tokenresult);
+await AsyncStorage.setItem("auth",JSON.stringify(tokenresult));
+setRequireRefresh(false);
+    }
+
+
+    if(RequireRefresh){
+      return(
+        <View style={styles.container}>
+         <Button title= "Refresh" onPress={refreshToken}/>
+        </View>
+      )
+    }
  
   return(
     <View style={styles.container}>
@@ -96,6 +137,12 @@ const ShowUserData = ()=>{
 onPress = {Auth ?  GetuserData  : ()=> prompt({useProxy:true,showInRecents:true})}>  
 <Text style={styles.buttonText}> {Auth ? " ": "Iniciar Sesión con Google"}  </Text>
 </Pressable>
+
+<Pressable style={styles.button}  
+onPress = {Auth ?  GetuserData  : ()=> prompt({useProxy:true,showInRecents:true})}>  
+<Text style={styles.buttonText}>  Username & Password  </Text>
+</Pressable>
+
 </View>
   ) 
 }
@@ -119,6 +166,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontWeight: 'bold',
+    fontFamily: 'Futura'
     
   },
   text1:{

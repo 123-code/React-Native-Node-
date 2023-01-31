@@ -15,27 +15,8 @@
     
   const Stack = createNativeStackNavigator();
 
-  const NavStack = ()=>{
-    return (
-      <NavigationContainer>
-          <Stack.Navigator>
-              <Stack.Screen
-              name="Login"
-              component={LoginScreen} />
-            <Stack.Screen
-              name="Home"
-              component={Intro} />
-            <Stack.Screen
-              name="PostPost"
-              component={AddPost}/>
-              <Stack.Screen
-              name="Posts"
-              component={PostScreen}/>
-          </Stack.Navigator>
-          </NavigationContainer>
-    
-      );
-  }
+ 
+  
 
   const PostScreen = ()=>{
   const [loading,setloading] = useState(true);
@@ -50,10 +31,25 @@
   const [SignInButtonText,SetSignInButtonText] = useState();
   const [Token,setToken] = useState();
   const [userData,setUserData] = useState();
+  const [userName,setUserName] = useState('');
  
       useEffect(() => {
           fetchposts();
     }, []);
+
+//GET UsuarioData API call  
+const fetchUserData = async()=>{
+  try{
+   const res = await fetch('192.168.1.3:8000/auth/getuserdata');  
+   const json = await res.json();
+   setUserName(json.username);
+   console.log(json.username) ;
+  }catch(err){
+    console.error(err);
+  }
+}
+
+
 
       const fetchposts = async ()=>{
           try{
@@ -69,17 +65,6 @@
         }
 
 
-        const fetchuserData = async()=>{
-          try{
-            const response = await axios.get(LoginDataURL);
-            const json = await response.json();
-            setUserData(json)
-          }catch(err){console.error(err)}
-        }
-
-        useEffect(()=>{
-          fetchuserData();
-        },[Token])
 
   const PostButton = ()=>{
     return(
@@ -101,8 +86,8 @@
           Posts Recientes 
           </Text>
           {PostButton()}
-          <Pressable style = {styles.button} onPress={()=>{navigation.navigate('Login')}}>
-          {Token ?   <Text style = {styles.alltext}>  </Text> : <Text style = {styles.alltext}>Iniciar Sesion </Text>}
+          <Pressable style = {styles.submitbtn} onPress={()=>{navigation.navigate('Login')}}>
+          {Token ?   <Text style = {styles.alltext}>  </Text> : <Text style = {styles.alltext}>Iniciar Sesión </Text>}
           </Pressable>
       </View>
      
@@ -160,6 +145,8 @@
           justifyContent: 'center',
         },
         button: {
+          marginRight: 70,
+          marginLeft: 70,
           alignItems: 'center',
           justifyContent: 'center',
           paddingVertical: 12,
@@ -168,12 +155,38 @@
           elevation: 3,
           backgroundColor: 'black',
         },
+        signinbutton:{
+          paddingTop:10,
+          paddingBottom:10,
+          color:'#fff',
+          textAlign:'center',
+          backgroundColor:'#68a0cf',
+          borderRadius: 10,
+          borderWidth: 1,
+          borderColor: '#fff',
+          position: 'absolute',
+          bottom: 0
+      },
         footer: {
           backgroundColor: '#eee',
           padding: 10,
           alignItems: 'center',
           justifyContent: 'center',
         },
+        submitbtn: {
+          marginRight: 130,
+          marginLeft: 130,
+          marginTop: 10,
+          paddingTop: 20,
+          paddingBottom: 20,
+          backgroundColor: '#68a0cf',
+          borderRadius: 10,
+          borderWidth: 1,
+          borderColor: '#fff',
+          textAlign: 'center',
+          alignItems: 'center',
+        },
+
   
   })
 

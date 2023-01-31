@@ -1,13 +1,13 @@
-    import USchema from '../Models/UserSchema.js';
+import USernameschema from '../Models/UsernameSchema.js'
     export const GetUserData = {
-        path:'/auth/google/getuserdata',
-        method:'get',
-        handler:async(req,res)=>{
-            try{
-             const UserData = await USchema.find();
-             res.json(UserData)
-            }catch(err){
+    path:'/auth/getuserdata',
+    method:'get',
+    handler:async(req,res)=>{
+        try{
+            const UserData = await USernameschema.find();
+            res.json(UserData)
+        }catch(err){
             console.error(err)
-            }
-            }
-            }
+             }
+        }
+        }
