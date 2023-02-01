@@ -1,18 +1,18 @@
 import USernameschema from '../Models/UsernameSchema.js'
 
-export const GetUsername = {
-  path:'/auth/getuserdata/:id',
-  method:'get',
-  handler:async(req,res)=>{
-    try{
-      const username = req.params.id;
-      const UserData = await USernameschema.findById({ username });
-      res.json(UserData)
-    } catch (err) {
-      console.error(err)
-    }
-  }
-};
+export const GetLatestUsername = {
+    path: '/auth/getuserdata',
+    method: 'get',
+    handler: async (req, res) => {
+      try {
+        const UserData = await USernameschema.find().sort({ _id: -1 }).limit(1);
+        res.json(UserData[0]);
+      } catch (err) {
+        console.error(err);
+      }
+    },
+  };
+
 /*
 router.patch("/updateciudades/:id",async(req,res)=>{
     try{

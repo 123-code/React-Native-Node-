@@ -3,40 +3,35 @@
   import React,{useState,useEffect} from 'react';
   import { ActivityIndicator,View,Text,StatusBar,StyleSheet, FlatList,Pressable } from 'react-native';
   import { useNavigation } from '@react-navigation/native';
+  import { AntDesign } from '@expo/vector-icons';
 
   const baseURL =  "http://172.31.150.215:8000/api/getPost";
+  const GetUserNameURL = 'http://172.31.150.215:8000/auth/getuserdata'
 
 
   const PostScreen = ()=>{
   const [loading,setloading] = useState(true);
-  const [postvalues,setpostvalues]= useState({
-      Nombre:'',
-      Precio:0,
-      Contenido:'',
-
-  });
   const navigation = useNavigation();
   const [data,setData ] = useState([]);
-  const [userName,setUserName] = useState([]);
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const response = await axios.get(GetUserNameURL);
+        setUserData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getUserData();
+  }, []);
  
       useEffect(() => {
           fetchposts();
     }, []);
 
-//GET UsuarioData API call  
-const fetchUserData = async()=>{
-  fetch("http://172.31.150.215:8000/auth/getuserdata/:username")
-  .then(response => response.text())
-  .then(result => setUserName(result))
-  .catch(error => console.log('error', error));
-  
-}
- 
-useEffect(()=>{
-  fetchUserData()
-},[])
- 
- 
+
       const fetchposts = async ()=>{
           try{
               const response = await fetch(baseURL);
@@ -50,6 +45,16 @@ useEffect(()=>{
           }
         }
 
+const onLikePress = async()=>{
+
+}
+
+
+ const LikeButton = ({AntIconName,size,color,onPress})=>{
+          return <AntDesign name={'like1'} size={size||24} color={color || 'black'} onPress={onLikePress}/>
+      
+  }
+
 
   const PostButton = ()=>{
     return(
@@ -60,8 +65,8 @@ useEffect(()=>{
           </Pressable>
       </View>
     )
-
   } 
+
   return (
       <>
       
@@ -75,7 +80,7 @@ useEffect(()=>{
       </View>
       <View style={{backgroundColor: '#FFFAFA'}}>
       <Pressable style = {styles.submitbtn} onPress={()=>{navigation.navigate('Profile')}}>
-         <Text style = {styles.alltext}> Mi Cuenta </Text>
+         <Text style = {styles.alltext}> Hola,{userData.username} </Text>
           </Pressable>
       </View>
 
@@ -85,7 +90,7 @@ useEffect(()=>{
           <FlatList
             data={data}
             renderItem={({ item }) => (
-              <Text style={styles.posttext}>{item.nombre}, {item.precio}, {item.descripcion}</Text>
+              <Text style={styles.posttext}>{item.nombre}, {item.precio}, {item.descripcion} <LikeButton/> </Text>
             )}
           />
         )}

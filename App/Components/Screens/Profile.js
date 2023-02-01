@@ -3,26 +3,31 @@ import { ActivityIndicator,View,Text,StatusBar,StyleSheet, FlatList,Pressable } 
 import axios from 'axios';
 
 const App = () => {
-    const client = axios.create({
-        baseURL: "https://localhost:3500/api" 
-      });
   const [userData, setUserData] = useState(null);
 
-
-  const FetchUserAPI = async(id)=>{
-   await client.get(id);
-   setUserData(userData.filter((usuario)=>{
-    return usuario.id == id;
-   })).catch((err)=>{console.error(err)})
-  }
-
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/auth/getuserdata');
+        setUserData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getUserData();
+  }, []);
 
   return (
-   <View>
-    Bienvenid@ 
-   </View>
+    <>
+      {userData ? (
+        <View> 
+          <Text>Vendedor: {userData.username}</Text>
+        </View>
+      ) : (
+        <Text>No user data</Text>
+      )}
+    </>
   );
 };
 
-export default App; 
-   
+export default App;
