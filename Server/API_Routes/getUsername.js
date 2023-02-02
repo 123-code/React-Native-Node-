@@ -1,7 +1,7 @@
 import USernameschema from '../Models/UsernameSchema.js'
 
 export const GetLatestUsername = {
-    path: '/auth/getuserdata',
+    path: '/auth/getoneuserdata',
     method: 'get',
     handler: async (req, res) => {
       try {

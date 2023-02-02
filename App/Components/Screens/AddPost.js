@@ -51,7 +51,7 @@ export default function AddPost({navigation}){
    };
 
    const handlesubmit = ()=>{
-    navigation.navigate('PostPost');
+    navigation.navigate("Gracias");
 }
 
 

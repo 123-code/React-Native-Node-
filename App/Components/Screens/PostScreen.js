@@ -4,29 +4,31 @@
   import { ActivityIndicator,View,Text,StatusBar,StyleSheet, FlatList,Pressable } from 'react-native';
   import { useNavigation } from '@react-navigation/native';
   import { AntDesign } from '@expo/vector-icons';
+  import axios from 'axios';
 
   const baseURL =  "http://172.31.150.215:8000/api/getPost";
-  const GetUserNameURL = 'http://172.31.150.215:8000/auth/getuserdata'
+  const GetUserNameURL = 'http://172.31.150.215:8000/auth/getoneuserdata'
 
 
   const PostScreen = ()=>{
   const [loading,setloading] = useState(true);
   const navigation = useNavigation();
   const [data,setData ] = useState([]);
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState();
 
   useEffect(() => {
     const getUserData = async () => {
-      try {
-        const response = await axios.get(GetUserNameURL);
-        setUserData(response.data);
-      } catch (error) {
-        console.error(error);
-      }
+        await axios.get(GetUserNameURL)
+        .then((res)=>{
+          setUserData(res.data.username)
+        }).catch((err)=>{
+          console.error(err);
+        }) 
     };
     getUserData();
   }, []);
  
+
       useEffect(() => {
           fetchposts();
     }, []);
@@ -80,7 +82,7 @@ const onLikePress = async()=>{
       </View>
       <View style={{backgroundColor: '#FFFAFA'}}>
       <Pressable style = {styles.submitbtn} onPress={()=>{navigation.navigate('Profile')}}>
-         <Text style = {styles.alltext}> Hola,{userData.username} </Text>
+         <Text style = {styles.alltext}> Hola, {userData}! </Text>
           </Pressable>
       </View>
 

@@ -25,7 +25,7 @@ const LoginForm = ({navigation}) => {
       console.error(err)
     }
   }
-  const PASSWORD_API_URL = 'http://192.168.1.3:8000/auth/createusername'
+  const PASSWORD_API_URL = 'http://172.31.150.215:8000/auth/createusername'
 
   const SaveuserData = async(username,password)=>{
      Encryptpin(password);
@@ -74,7 +74,7 @@ const LoginForm = ({navigation}) => {
       </Text>
       <Pressable style={styles.button} 
       onPress = {()=>{SaveuserData(username,password),navigation.navigate("Posts")}}>  
-     <Text style={styles.alltext}>  Ingresar  </Text>
+     <Text style={styles.alltext}>  Registrarse  </Text>
      </Pressable>
    
      <Text  style={styles.greentext}>  {"\n"} Ya tienes una cuenta?   {"\n"} </Text>

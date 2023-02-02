@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import  { routes }  from  '../API_Routes';
 import cors from 'cors';
+import {DeleteUserDataRoute} from '../API_Routes';
 
     const port = 8000;
     const url = "mongodb://127.0.0.1:27017/catalogo";
@@ -12,7 +13,7 @@ import cors from 'cors';
    routes.forEach(route => {
     server[route.method](route.path, route.handler);
 });
-
+//server.use(DeleteUserDataRoute);
 
 const DatabaseC = async()=>{
        

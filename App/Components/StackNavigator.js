@@ -7,6 +7,7 @@ import PostScreen from './Screens/PostScreen';
 import Profile from './Screens/Profile';
 import  SignUp from './Screens/SignUp'
 import Ingresar from './Screens/Ingresar'
+import Gracias from './Screens/Gracias'
 
 
 const Stack = createNativeStackNavigator();
@@ -23,6 +24,9 @@ export default function AppStack (){
             <Stack.Screen
             name="PostPost"
             component={AddPost}/>
+            <Stack.Screen
+            name="Gracias"
+            component={Gracias}/>
              <Stack.Screen
             name="Posts"
             component={PostScreen}/>  
