@@ -6,7 +6,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import RoundButton from '../RoundButton';
 
 const client = axios.create({
-    baseURL: 'http://172.31.170.131:8000/api/postPost'
+    baseURL: 'http://172.31.150.215:8000/api/postPost'
   });
   //http://172.31.150.215:8000/api/postPost
 

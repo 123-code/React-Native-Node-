@@ -75,15 +75,15 @@ const onLikePress = async()=>{
       <View style={{ backgroundColor: '#3CB371',padding:5}}> 
       <View>
       <Text style = {styles.bigBlue}>
-          Posts Recientes 
-          </Text>
-          {PostButton()}
+      Posts Recientes 
+      </Text>
+      {PostButton()}
       </View>
       </View>
       <View style={{backgroundColor: '#FFFAFA'}}>
       <Pressable style = {styles.submitbtn} onPress={()=>{navigation.navigate('Profile')}}>
-         <Text style = {styles.alltext}> Hola, {userData}! </Text>
-          </Pressable>
+      <Text style = {styles.alltext}> Hola, {userData}! </Text>
+      </Pressable>
       </View>
 
      

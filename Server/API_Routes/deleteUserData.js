@@ -2,7 +2,7 @@ import USernameschema from '../Models/UsernameSchema.js';
 
 export const DeleteUserDataRoute = {
     path:'/api/deleteuserdata/:id',
-    method:'DELETE',
+    method:'delete',
     handler: async(req,res)=>{
         try{
             const id = req.params.id;

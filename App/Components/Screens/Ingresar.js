@@ -68,6 +68,8 @@ son iguales, el password es correcto.
 */
 
 const checkPasswordValid = async(password,phash)=>{
+  SaveuserData();
+  getUserPasswordHash();
 if(password === phash){
     setpasswordcorrect(true)
 }

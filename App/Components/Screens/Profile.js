@@ -13,34 +13,36 @@ const App = () => {
   const UpdateProfileURL = 'http://172.31.150.215:8000/api/updatedata/:id';
 
 //passwords deberian guardarse aparte. 
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const response = await axios.get(GetUserNameURL);
-        setUserData(response.data.username);
-        setUserID(response.data._id);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getUserData();
-  }, []);
+useEffect(() => { 
+  const getUserData = async () => {
+    try {
+      const response = await axios.get(GetUserNameURL);
+      setUserData(response.data.username);
+      setUserID(response.data._id);
+      console.log("ID",UserID);
+    } catch (error) {
+      console.error(error);
+    }
+  }; 
+  getUserData();
+}, []);
+ 
 
-  const DeleteuserData = async({id})=>{
+  const DeleteuserData = async()=>{
     try{
-      await axios.delete(`http://172.31.150.215:8000/api/deleteuserdata/:${id}`);
+      await axios.delete(`http://172.31.150.215:8000/api/deleteuserdata/${UserID.toString()}`);
       Alert.alert("Tu perfil ha sido eliminado!");
     }
     catch(err){
       console.error(err);
-      Alert.alert("Tu perfil ha sido eliminado!");
+      Alert.alert("Error en la eliminacion!");
     }
   }
 
 
-const UpdateUserData = async({id})=>{
+const UpdateUserData = async()=>{
   try{
-    await axios.put(`http://172.31.150.215:8000/api/updatedata/:${id}`);
+    await axios.put(`http://172.31.150.215:8000/api/updatedata/${UserID.toString()}`);
     Alert.alert("Tu perfil ha sido actualizado!");
   }
   catch(err){
@@ -79,11 +81,11 @@ const UpdateUserData = async({id})=>{
         />
 <Text>{"\n"}</Text>
 <Pressable style={styles.redbutton}>
-<Text style={styles.alltext} onPress={()=>{DeleteuserData(UserID)}}> Eliminar Perfil </Text>
+<Text style={styles.alltext} onPress={DeleteuserData}> Eliminar Perfil </Text>
 </Pressable>
 <Text> {"\n"} </Text>
 <Pressable style={styles.redbutton}>
-<Text onPress={UpdateUserData(userData.id)} style={styles.alltext}> Actualizar Datos  </Text>
+<Text onPress={UpdateUserData} style={styles.alltext}> Actualizar Datos  </Text>
 </Pressable>
 
         </View>

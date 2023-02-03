@@ -8,9 +8,8 @@ import { Createuser } from './createuser';
 import { CreateUserNameRoute } from './createusername';
 import { GetUserData} from './GetUserData.js';
 import { GetLatestUsername } from './GetUsername.js';
-//import { DeleteUserDataRoute } from './deleteUserData.js';
-//import {UpdateProfile} from './UpdateUser.js';
-import USernameschema from '../Models/UsernameSchema.js';
+import { DeleteUserDataRoute } from './deleteUserData.js';
+import {UpdateProfile} from './UpdateUser.js';
 
 // get y post API 
 
@@ -21,10 +20,12 @@ export const routes = [
     CreateUserNameRoute,
     GetUserData,
     GetLatestUsername,
+    DeleteUserDataRoute,
+    UpdateProfile
     
     
 ]; 
-
+/*
 export const DeleteUserDataRoute = {
     path:'/api/deleteuserdata/:id',
     method:'DELETE',
@@ -41,7 +42,7 @@ export const DeleteUserDataRoute = {
 
     }
 }
-
+*/
    
   
 

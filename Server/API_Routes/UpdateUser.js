@@ -1,7 +1,7 @@
-import { USernameschema } from '../Models/UserModel.js';
+import {USernameschema} from '../Models/UsernameSchema.js';
 export const UpdateProfile = {
     path:'/api/updatedata/:id',
-    method:'PUT',
+    method:'put',
 
     handler: async(req,res)=>{
         try{
