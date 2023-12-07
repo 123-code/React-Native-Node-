@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {View,Text,StyleSheet,TextInput,Dimensions,Button,Pressable } from 'react-native';
+import {View,Text,StyleSheet,TextInput,Dimensions,Button,Pressable,ScrollView  } from 'react-native';
 import colors from './misc/colors';
 import axios from 'axios';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -56,75 +56,88 @@ export default function AddPost({navigation}){
 
 
 //axios.post 
-return(
-    <>
-<View>
-    <Text style={styles.text1}> Nombre:</Text>
-    <TextInput style={styles.textInput} onChangeText={newText => setNombre(newText)} placeholder = "Post"/>
+return (
+  <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <Text style={styles.label}>Nombre:</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={newText => setNombre(newText)}
+        placeholder="Post"
+      />
 
-    <Text style={styles.text1}> Precio:</Text>
-    <TextInput style={styles.textInput}  onChangeText={newText => setPrecio(newText)}  placeholder = "Precio"/>
- 
-    <Text style={styles.text1}> Descripción:</Text>
-    <TextInput style={styles.textInput}  onChangeText={newText => setContenido(newText)}  placeholder = "Descripción"/>
-    
-    <Pressable style={styles.button} onPress={()=>{postPost(Nombre,Precio,Contenido)}}>
-      <Text style={styles.text}> Agregar </Text>
-    </Pressable>
-    <RoundButton onPress={handlesubmit} AntIconName='arrowright'/> 
-   
+      <Text style={styles.label}>Precio:</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={newText => setPrecio(newText)}
+        placeholder="Precio"
+        keyboardType="numeric"
+      />
 
-</View>
-    </>
-)
+      <Text style={styles.label}>Descripción:</Text>
+      <TextInput
+        style={[styles.input, styles.multilineInput]}
+        onChangeText={newText => setContenido(newText)}
+        placeholder="Descripción"
+        multiline
+        numberOfLines={4}
+      />
 
-}  
+      <Pressable style={styles.button} onPress={() => postPost(Nombre, Precio, Contenido)}>
+        <Text style={styles.buttonText}>Agregar</Text>
+      </Pressable>
+
+      {/* Consider the RoundButton component usage as needed */}
+      {/* <RoundButton onPress={handleSubmit} AntIconName="arrowright" /> */}
+    </ScrollView>
+  </View>
+);
+}
+
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        justifyContent:'center',
-        alignItems:'center',
-    },
-textInput:{
-borderWidth:2,
-borderColor:colors.DARK,
-height:40,
-width:250,
-borderRadius:12,margin:12
+container: {
+  flex: 1,
+  backgroundColor: colors.LIGHT_GRAY,
 },
-    button: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      paddingVertical: 12,
-      paddingHorizontal: 32,
-      borderRadius: 4,
-      elevation: 3,
-      backgroundColor: 'black',
-    },
-    text: {
-      fontSize: 16,
-      lineHeight: 21,
-      fontWeight: 'bold',
-      letterSpacing: 0.25,
-      color: 'white',
-    },
-    text1:{
-        fontSize: 16,
-      lineHeight: 21,
-      fontWeight: 'bold',
-      letterSpacing: 0.25,
-      color: 'black',
-    }
-  });
-
-
-  /*
-     let response = await client.post('',{
-      Nombre:Nombre,
-      Contenido:Contenido,
-    });
-    JSON.decycle(setNombre(response.Nombre));
-    JSON.decycle(setContenido(response.Contenido));
-  
-  */
-  
+scrollContainer: {
+  flexGrow: 1,
+  padding: 20,
+  justifyContent: 'center',
+},
+label: {
+  fontSize: 16,
+  fontWeight: 'bold',
+  color: colors.BLACK,
+  marginBottom: 30,
+},
+input: {
+  borderWidth: 2,
+  borderColor: colors.DARK,
+  height: 40,
+  width: '100%',
+  borderRadius: 12,
+  paddingHorizontal: 10,
+  marginBottom: 50,
+},
+multilineInput: {
+  height: 100,
+  textAlignVertical: 'top',
+},
+button: {
+  alignItems: 'center',
+  justifyContent: 'center',
+  paddingVertical: 12,
+  borderRadius: 4,
+  elevation: 3,
+  backgroundColor: 'black',
+  width: '70%',
+  alignSelf: 'center',
+  marginTop: 20,
+  borderRadius: 40,
+},
+buttonText: {
+  fontSize: 16,
+  fontWeight: 'bold',
+  color: 'white',
+},
+});
